@@ -1,0 +1,55 @@
+/* style.css */
+
+/* default margin/padding removal */
+
+:root, body, * {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 12px;
+}
+
+.header p {
+    font-size: 24px;
+    margin: 12px;
+
+}
+
+.header button {
+    width: 96px;
+    height: 48px;
+    font-size: 16px;
+    margin: 12px;
+}
+
+/* Main/table styles */
+
+table, td, th {
+    border: 1px solid black;
+    font-size: 24px;
+    padding: 12px;
+}
+
+table {
+    gap: 12px;
+}

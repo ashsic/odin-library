@@ -1,5 +1,7 @@
 // Main.js
 
+const myLibrary = [];
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -13,4 +15,14 @@ function Book(title, author, pages, read) {
     };
 };
 
-const theHobbit = new Book("The Hobbit", "JRR Tolkien", 295, true);
+function addBookToLibrary() {
+
+    myLibrary.push(book);
+}
+
+let theHobbit = new Book("The Hobbit", "JRR Tolkien", 295, false);
+myLibrary.push(theHobbit)
+
+let blackSwan = new Book("The Black Swan: The Impact of the Highly Improbable", "Nassim Nicholas Taleb", 400, true);
+myLibrary.push(blackSwan);
+
