@@ -1,10 +1,16 @@
 /* style.css */
 
-/* default margin/padding removal */
+/* font style, default margin/padding removal */
+
+body {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
 
 :root, body, * {
     margin: 0;
     padding: 0;
+    color: #dddddd;
+    background-color: #111530;
 }
 
 /* Header styles */
@@ -35,21 +41,66 @@ h1 {
 
 }
 
-.header button {
+.new-book {
     width: 96px;
     height: 48px;
     font-size: 16px;
     margin: 12px;
+    border: 1px solid #dddddd;
+    background-color: #347285;
+    border-radius: 8px;
 }
+
+
 
 /* Main/table styles */
 
 table, td, th {
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     font-size: 24px;
     padding: 12px;
 }
 
 table {
-    gap: 12px;
+    margin: 24px;
+}
+
+/* Form styles */
+
+form {
+    background-color: #dddddd;
+    height: 400px;
+    width: 400px;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+form label {
+    background-color: #dddddd;
+    color: #000;
+}
+
+form input {
+    color: #000;
+    background-color: #c4c4c4;
+    border-radius: 24px;
+    height: 40px;
+    padding: 8px 24px;
+    border: 0;
+    font-size: 16px;
+    outline: 0;
+
+
+}
+
+.submit-button {
+    margin: 24px 136px;
+    background-color: #347285;
+    color: #dddddd;
+    width: 128px;
+    height: 48px;
+    
 }
