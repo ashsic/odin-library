@@ -15,11 +15,15 @@ body {
 
 /* Header styles */
 
-.container {
+.container, .container2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.container2 {
+    position: relative; 
 }
 
 .header {
@@ -41,18 +45,6 @@ h1 {
 
 }
 
-.new-book {
-    width: 96px;
-    height: 48px;
-    font-size: 16px;
-    margin: 12px;
-    border: 1px solid #dddddd;
-    background-color: #347285;
-    border-radius: 8px;
-}
-
-
-
 /* Main/table styles */
 
 table, td, th {
@@ -63,6 +55,16 @@ table, td, th {
 
 table {
     margin: 24px;
+}
+
+.new-book {
+    width: 96px;
+    height: 48px;
+    font-size: 16px;
+    margin: 12px;
+    border: 1px solid #dddddd;
+    background-color: #347285;
+    border-radius: 8px;
 }
 
 /* Form styles */
@@ -76,11 +78,14 @@ form {
     display: flex;
     flex-direction: column;
     color: #000;
+    position: absolute;
+    top: 0px;
 }
 
 form label {
     background-color: #dddddd;
     color: #000;
+    margin: 8px 0;
 }
 
 form input {
@@ -92,8 +97,14 @@ form input {
     border: 0;
     font-size: 16px;
     outline: 0;
+}
 
+input[type="text"]:focus {
+    outline: 2px #347285 solid;
+}
 
+input[type="checkbox"] {
+    height: 64px;
 }
 
 .submit-button {

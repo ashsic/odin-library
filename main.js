@@ -30,9 +30,14 @@ myLibrary.push(everybodyLies);
 
 // DOM Manipulation
 
-const table = document.querySelector("table");
+// constant HTML hooks:
 
-const createLibrary = function(){
+const table = document.querySelector("table");
+const container = document.querySelector(".container2");
+
+//functions:
+
+function createLibrary(){
     while (table.childNodes.length > 2) {
         table.removeChild(table.lastElementChild);
     }
@@ -47,27 +52,16 @@ const createLibrary = function(){
     })
 };
 
-createLibrary();
-
-const container = document.querySelector(".container");
-let newBook = document.createElement("button");
-newBook.setAttribute("class", "new-book");
-newBook.textContent = "New Book";
-container.appendChild(newBook);
-
 function handleSubmitClick(event) {
+    let form = event.target;
     event.preventDefault();
-    let form = event.target.parentElement;
     myLibrary.push(new Book(form.title.value, form.author.value,
         form.pages.value, form.read.checked));
     createLibrary();
+    form.remove()
 };
 
-
-
-
 function handleNewBookClick() {
-    newBook.remove();
     let bookForm = document.createElement("form");
     bookForm.setAttribute("method", "GET");
     bookForm.setAttribute("action", "main.js");
@@ -81,6 +75,7 @@ function handleNewBookClick() {
             field.setAttribute("type", "checkbox");
         } else {
             field.setAttribute("type", "text");
+            field.required = true;
         }
         bookForm.appendChild(label);
         bookForm.appendChild(field);
@@ -92,9 +87,24 @@ function handleNewBookClick() {
     submit.setAttribute("class", "submit-button");
     bookForm.appendChild(submit);
     container.appendChild(bookForm);
-    submit.addEventListener("click", handleSubmitClick);
+    bookForm.addEventListener("submit", handleSubmitClick);
 };
 
-let submit = document.querySelector("#submit");
+function createNewBookButton() {
+    let newBook = document.createElement("button");
+    newBook.setAttribute("class", "new-book");
+    newBook.textContent = "New Book";
+    container.appendChild(newBook);
+};
 
-newBook.addEventListener("click", handleNewBookClick);
+function updatePage() {
+    createLibrary();
+    createNewBookButton();
+    
+    let newBook = document.querySelector(".new-book");
+    newBook.addEventListener("click", handleNewBookClick);
+    
+    let submit = document.querySelector("#submit");
+};
+
+updatePage();
