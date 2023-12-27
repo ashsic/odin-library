@@ -32,15 +32,22 @@ myLibrary.push(everybodyLies);
 
 const table = document.querySelector("table");
 
-myLibrary.forEach((book) => {
-    let row = document.createElement("tr");
-    for (let item in book) {
-        let value = document.createElement("td");
-        value.textContent = book[item];
-        row.appendChild(value);
-    };
-    table.appendChild(row);
-});
+const createLibrary = function(){
+    while (table.childNodes.length > 2) {
+        table.removeChild(table.lastElementChild);
+    }
+    myLibrary.forEach((book) => {
+        let row = document.createElement("tr");
+        for (let item in book) {
+            let value = document.createElement("td");
+            value.textContent = book[item];
+            row.appendChild(value);
+        };
+        table.appendChild(row);
+    })
+};
+
+createLibrary();
 
 const container = document.querySelector(".container");
 let newBook = document.createElement("button");
@@ -48,11 +55,22 @@ newBook.setAttribute("class", "new-book");
 newBook.textContent = "New Book";
 container.appendChild(newBook);
 
+function handleSubmitClick(event) {
+    event.preventDefault();
+    let form = event.target.parentElement;
+    myLibrary.push(new Book(form.title.value, form.author.value,
+        form.pages.value, form.read.checked));
+    createLibrary();
+};
+
+
+
+
 function handleNewBookClick() {
     newBook.remove();
     let bookForm = document.createElement("form");
     bookForm.setAttribute("method", "GET");
-    bookForm.setAttribute("action", "test.js");
+    bookForm.setAttribute("action", "main.js");
     for (let item in theHobbit) {
         let label = document.createElement("label");
         label.textContent = item.substring(0, 1).toUpperCase() + item.substring(1) + ":";
@@ -64,17 +82,19 @@ function handleNewBookClick() {
         } else {
             field.setAttribute("type", "text");
         }
-
         bookForm.appendChild(label);
         bookForm.appendChild(field);
     }
     let submit = document.createElement("input");
     submit.textContent = "Submit";
     submit.setAttribute("type", "submit");
+    submit.setAttribute("id", "submit");
     submit.setAttribute("class", "submit-button");
     bookForm.appendChild(submit);
     container.appendChild(bookForm);
-}
+    submit.addEventListener("click", handleSubmitClick);
+};
+
+let submit = document.querySelector("#submit");
 
 newBook.addEventListener("click", handleNewBookClick);
-
