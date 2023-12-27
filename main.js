@@ -2,7 +2,7 @@
 
 // Library array and book constructor
 
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -10,11 +10,6 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 };
-
-function addBookToLibrary() {
-    let book = "";
-    myLibrary.push(book);
-}
 
 // Populating initial library
 
@@ -35,21 +30,52 @@ myLibrary.push(everybodyLies);
 const table = document.querySelector("table");
 const container = document.querySelector(".container2");
 
-//functions:
+// functions:
+
+function removeButtonHandler(event) {
+    const index = event.target.value;
+    myLibrary.splice(index, 1);
+    createLibrary();
+};
+
+function boolHandler(event) {
+    const index = event.target.value;
+    if (myLibrary[index].read === true){
+        myLibrary[index].read = false;    
+    } else {
+        myLibrary[index].read = true;
+    }
+    createLibrary();
+};
 
 function createLibrary(){
     while (table.childNodes.length > 2) {
         table.removeChild(table.lastElementChild);
     }
-    myLibrary.forEach((book) => {
+    myLibrary.forEach((book, index) => {
         let row = document.createElement("tr");
         for (let item in book) {
             let value = document.createElement("td");
-            value.textContent = book[item];
+            if (item == "read") {
+                let boolButton = document.createElement("button");
+                boolButton.textContent = book[item];
+                boolButton.setAttribute("value", index);
+                boolButton.addEventListener("click", boolHandler);
+                value.appendChild(boolButton);
+            } else {
+                value.textContent = book[item];
+            }
             row.appendChild(value);
         };
+        let value = document.createElement("td")
+        let removeButton = document.createElement("button");
+        removeButton.setAttribute("value", index);
+        removeButton.textContent = "Remove";
+        removeButton.addEventListener("click", removeButtonHandler);
+        value.appendChild(removeButton)
+        row.appendChild(value);
         table.appendChild(row);
-    })
+    });
 };
 
 function handleSubmitClick(event) {
