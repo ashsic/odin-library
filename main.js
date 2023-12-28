@@ -1,27 +1,44 @@
 // Main.js
 
-// Library array and book constructor
+// Library array and book class
 
-let myLibrary = [];
+// let myLibrary = [];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Library {
+    constructor(){
+        this.library = [];
+    };
 };
 
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    };
+};
+
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// };
+
 // Populating initial library
+
+let myLibrary = new Library();
 
 let theHobbit = new Book("The Hobbit", "JRR Tolkien", 295, false);
 // myLibrary.push(theHobbit)
 
 let blackSwan = new Book("The Black Swan: The Impact of the Highly Improbable", "Nassim Nicholas Taleb", 400, true);
-myLibrary.push(blackSwan);
+myLibrary.library.push(blackSwan);
 
 let everybodyLies = new Book("Everybody Lies: Big Data, New Data, and What the" +
 " Internet Can Tell Us About Who We Really Are", "Seth Stephens-Davidowitz", 338, true);
-myLibrary.push(everybodyLies);
+myLibrary.library.push(everybodyLies);
 
 // DOM Manipulation
 
@@ -34,16 +51,16 @@ const container = document.querySelector(".container2");
 
 function removeButtonHandler(event) {
     const index = event.target.value;
-    myLibrary.splice(index, 1);
+    myLibrary.library.splice(index, 1);
     createLibrary();
 };
 
 function boolHandler(event) {
     const index = event.target.value;
-    if (myLibrary[index].read === true){
-        myLibrary[index].read = false;    
+    if (myLibrary.library[index].read === true){
+        myLibrary.library[index].read = false;    
     } else {
-        myLibrary[index].read = true;
+        myLibrary.library[index].read = true;
     }
     createLibrary();
 };
@@ -52,7 +69,7 @@ function createLibrary(){
     while (table.childNodes.length > 2) {
         table.removeChild(table.lastElementChild);
     }
-    myLibrary.forEach((book, index) => {
+    myLibrary.library.forEach((book, index) => {
         let row = document.createElement("tr");
         for (let item in book) {
             let value = document.createElement("td");
@@ -76,12 +93,13 @@ function createLibrary(){
         row.appendChild(value);
         table.appendChild(row);
     });
+    console.log(myLibrary.library)
 };
 
 function handleSubmitClick(event) {
     let form = event.target;
     event.preventDefault();
-    myLibrary.push(new Book(form.title.value, form.author.value,
+    myLibrary.library.push(new Book(form.title.value, form.author.value,
         form.pages.value, form.read.checked));
     createLibrary();
     form.remove()
