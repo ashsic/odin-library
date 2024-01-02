@@ -117,6 +117,11 @@ function handleNewBookClick() {
         field.setAttribute("name", item);
         if (item == "read") {
             field.setAttribute("type", "checkbox");
+        } else if (item == "pages") {
+            field.setAttribute("min", 1);
+            field.setAttribute("max", 9999);
+            field.setAttribute("type", "number");
+            field.required = true;
         } else {
             field.setAttribute("type", "text");
             field.required = true;
@@ -124,6 +129,7 @@ function handleNewBookClick() {
         bookForm.appendChild(label);
         bookForm.appendChild(field);
     }
+
     let submit = document.createElement("input");
     submit.textContent = "Submit";
     submit.setAttribute("type", "submit");
