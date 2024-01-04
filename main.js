@@ -124,6 +124,14 @@ function handleNewBookClick() {
             field.required = true;
         } else {
             field.setAttribute("type", "text");
+            field.setAttribute('minlength', 4);
+            field.addEventListener('input', (event) => {
+                if (!field.validity.valid) {
+                    field.setCustomValidity("Input too short.");
+                } else {
+                    field.setCustomValidity("");
+                }
+            })
             field.required = true;
         }
         bookForm.appendChild(label);
